@@ -1,6 +1,7 @@
-﻿using NUnit.Framework;
-using UniTrait.Interfaces;
+﻿using System;
+using NUnit.Framework;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace UniTrait.Tests
 {
@@ -12,7 +13,7 @@ namespace UniTrait.Tests
         [SetUp]
         public void SetUp()
         {
-            gameObject = new GameObject("TestObj");
+            gameObject = new GameObject("TestObject");
             container = gameObject.AddComponent<UniTraitContainer>();
         }
 
@@ -23,93 +24,214 @@ namespace UniTrait.Tests
         }
 
         [Test]
-        public void AddTrait_RegistersUpdatableTrait()
+        public void AddTrait_RegistersAndResolvesTrait()
         {
-            var trait = new DummyUpdatableTrait();
+            var trait = new DummyTrait();
             container.AddTrait(trait);
 
-            var resolved = container.GetTrait<DummyUpdatableTrait>();
-            Assert.AreEqual(trait, resolved);
+            var resolved = container.GetTrait<DummyTrait>();
+            Assert.AreSame(trait, resolved);
+        }
+
+        [Test]
+        public void AddTrait_ThrowsException_WhenDuplicateTraitAdded()
+        {
+            var trait = new DummyTrait();
+            container.AddTrait(trait);
+
+            var ex = Assert.Throws<ArgumentException>(() => container.AddTrait(trait));
+            Assert.That(ex.Message, Does.Contain("already exists"));
+        }
+
+        [Test]
+        public void ManualAwake_CallsOnAwake()
+        {
+            var trait = new DummyTrait();
+            container.AddTrait(trait);
+
+            container.ManualAwake();
+
+            Assert.IsTrue(trait.Awoke);
+        }
+
+        [Test]
+        public void ManualStart_CallsOnStart()
+        {
+            var trait = new DummyTrait();
+            container.AddTrait(trait);
+
+            container.ManualStart();
+
+            Assert.IsTrue(trait.Started);
+        }
+
+        [Test]
+        public void ManualUpdate_CallsOnUpdate()
+        {
+            var trait = new DummyTrait();
+            container.AddTrait(trait);
 
             container.ManualUpdate();
-            Assert.IsTrue(trait.MethodCalled);
+
+            Assert.IsTrue(trait.Updated);
         }
 
         [Test]
-        public void AddTrait_RegistersFixedUpdatableTrait()
+        public void ManualFixedUpdate_CallsOnFixedUpdate()
         {
-            var trait = new DummyFixedUpdatableTrait();
+            var trait = new DummyTrait();
             container.AddTrait(trait);
-
-            var resolved = container.GetTrait<DummyFixedUpdatableTrait>();
-            Assert.AreEqual(trait, resolved);
 
             container.ManualFixedUpdate();
-            Assert.IsTrue(trait.MethodCalled);
+
+            Assert.IsTrue(trait.FixedUpdated);
         }
 
         [Test]
-        public void AddTrait_RegistersLateUpdatableTrait()
+        public void ManualLateUpdate_CallsOnLateUpdate()
         {
-            var trait = new DummyLateUpdatableTrait();
+            var trait = new DummyTrait();
             container.AddTrait(trait);
-
-            var resolved = container.GetTrait<DummyLateUpdatableTrait>();
-            Assert.AreEqual(trait, resolved);
 
             container.ManualLateUpdate();
-            Assert.IsTrue(trait.MethodCalled);
+
+            Assert.IsTrue(trait.LateUpdated);
         }
 
         [Test]
-        public void AddTrait_AssignsEventBusIfListener()
+        public void ManualEnable_CallsOnEnable()
         {
-            var trait = new DummyEventListenerTrait();
+            var trait = new DummyTrait();
             container.AddTrait(trait);
 
-            var resolved = container.GetTrait<DummyEventListenerTrait>();
-            Assert.AreEqual(trait, resolved);
+            container.ManualEnable();
+
+            Assert.IsTrue(trait.Enabled);
+        }
+
+        [Test]
+        public void ManualDisable_CallsOnDisable()
+        {
+            var trait = new DummyTrait();
+            container.AddTrait(trait);
+
+            container.ManualDisable();
+
+            Assert.IsTrue(trait.Disabled);
+        }
+
+        [Test]
+        public void ManualDestroy_CallsOnDestroy()
+        {
+            var trait = new DummyTrait();
+            container.AddTrait(trait);
+
+            container.ManualDestroy();
+
+            Assert.IsTrue(trait.Destroyed);
+        }
+
+        [Test]
+        public void ManualValidate_CallsOnValidate()
+        {
+            var trait = new DummyTrait();
+            container.AddTrait(trait);
+
+            container.ManualValidate();
+
+            Assert.IsTrue(trait.Validated);
+        }
+
+        [Test]
+        public void AddTrait_InjectsContainer()
+        {
+            var trait = new DummyTrait();
+            container.AddTrait(trait);
+
+            Assert.IsNotNull(trait.Container);
+        }
+
+        [Test]
+        public void AddTrait_InjectsEventBus()
+        {
+            var trait = new DummyTrait();
+            container.AddTrait(trait);
+
             Assert.IsNotNull(trait.EventBus);
         }
 
-        private class DummyUpdatableTrait : IUpdatableUniTrait
+        private class DummyTrait : IUniTrait
         {
-            public bool MethodCalled { get; private set; }
+            public bool Awoke { get; private set; }
+            public bool Started { get; private set; }
+            public bool Enabled { get; private set; }
+            public bool Disabled { get; private set; }
+            public bool Updated { get; private set; }
+            public bool FixedUpdated { get; private set; }
+            public bool LateUpdated { get; private set; }
+            public bool Destroyed { get; private set; }
+            public bool Validated { get; private set; }
+            public UniTraitContainer Container { get; private set; }
+            public UniTraitEventBus EventBus { get; private set; }
+
+            #region IUniTrait Members
+
+            public void OnAwake()
+            {
+                Awoke = true;
+            }
+
+            public void OnStart()
+            {
+                Started = true;
+            }
+
+            public void OnEnable()
+            {
+                Enabled = true;
+            }
+
+            public void OnDisable()
+            {
+                Disabled = true;
+            }
 
             public void OnUpdate()
             {
-                MethodCalled = true;
+                Updated = true;
             }
-        }
-
-        private class DummyFixedUpdatableTrait : IFixedUpdatableUniTrait
-        {
-            public bool MethodCalled { get; private set; }
 
             public void OnFixedUpdate()
             {
-                MethodCalled = true;
+                FixedUpdated = true;
             }
-        }
-
-        private class DummyLateUpdatableTrait : ILateUpdatableUniTrait
-        {
-            public bool MethodCalled { get; private set; }
 
             public void OnLateUpdate()
             {
-                MethodCalled = true;
+                LateUpdated = true;
             }
-        }
 
-        private class DummyEventListenerTrait : IEventListenerUniTrait
-        {
-            public UniTraitEventBus EventBus { get; private set; }
+            public void OnDestroy()
+            {
+                Destroyed = true;
+            }
+
+            public void OnValidate()
+            {
+                Validated = true;
+            }
+
+            public void InjectContainer(UniTraitContainer container)
+            {
+                Container = container;
+            }
 
             public void InjectEventBus(UniTraitEventBus eventBus)
             {
                 EventBus = eventBus;
             }
+
+            #endregion
         }
     }
 }
