@@ -53,14 +53,6 @@ namespace UniTrait
             ManualDisable();
         }
 
-        protected void OnValidate()
-        {
-            traitsList.Clear();
-            traitsIndexes.Clear();
-            AutoAddTraits();
-            ManualValidate();
-        }
-
         #endregion
 
         public void ManualAwake()
@@ -135,6 +127,22 @@ namespace UniTrait
             }
         }
 
+        public void ManualDrawGizmos()
+        {
+            for (var i = 0; i < traitsList.Count; i++)
+            {
+                traitsList[i].OnDrawGizmos();
+            }
+        }
+
+        public void ManualDrawGizmosSelected()
+        {
+            for (var i = 0; i < traitsList.Count; i++)
+            {
+                traitsList[i].OnDrawGizmosSelected();
+            }
+        }
+
         public void AddTrait<T>(T trait) where T : IUniTrait
         {
             if (traitsIndexes.ContainsKey(typeof(T)))
@@ -183,5 +191,25 @@ namespace UniTrait
                 }
             }
         }
+
+# if UNITY_EDITOR
+        protected void OnDrawGizmos()
+        {
+            ManualDrawGizmos();
+        }
+
+        protected void OnDrawGizmosSelected()
+        {
+            ManualDrawGizmosSelected();
+        }
+
+        protected void OnValidate()
+        {
+            traitsList.Clear();
+            traitsIndexes.Clear();
+            AutoAddTraits();
+            ManualValidate();
+        }
+#endif
     }
 }

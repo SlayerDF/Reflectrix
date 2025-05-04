@@ -143,6 +143,28 @@ namespace UniTrait.Tests
         }
 
         [Test]
+        public void ManualDrawGizmos_CallsOnDrawGizmos()
+        {
+            var trait = new DummyTrait();
+            container.AddTrait(trait);
+
+            container.ManualDrawGizmos();
+
+            Assert.IsTrue(trait.DrewGizmos);
+        }
+
+        [Test]
+        public void ManualDrawGizmos_CallsOnDrawGizmosSelected()
+        {
+            var trait = new DummyTrait();
+            container.AddTrait(trait);
+
+            container.ManualDrawGizmosSelected();
+
+            Assert.IsTrue(trait.DrewGizmosSelected);
+        }
+
+        [Test]
         public void AddTrait_InjectsContainer()
         {
             var trait = new DummyTrait();
@@ -171,6 +193,8 @@ namespace UniTrait.Tests
             public bool LateUpdated { get; private set; }
             public bool Destroyed { get; private set; }
             public bool Validated { get; private set; }
+            public bool DrewGizmos { get; private set; }
+            public bool DrewGizmosSelected { get; private set; }
             public UniTraitContainer Container { get; private set; }
             public UniTraitEventBus EventBus { get; private set; }
 
@@ -219,6 +243,16 @@ namespace UniTrait.Tests
             public void OnValidate()
             {
                 Validated = true;
+            }
+
+            public void OnDrawGizmos()
+            {
+                DrewGizmos = true;
+            }
+
+            public void OnDrawGizmosSelected()
+            {
+                DrewGizmosSelected = true;
             }
 
             public void InjectContainer(UniTraitContainer container)

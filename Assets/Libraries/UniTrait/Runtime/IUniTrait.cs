@@ -38,6 +38,14 @@
         {
         }
 
+        void OnDrawGizmos()
+        {
+        }
+
+        void OnDrawGizmosSelected()
+        {
+        }
+
         void InjectContainer(UniTraitContainer container)
         {
         }
