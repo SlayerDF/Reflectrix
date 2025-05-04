@@ -26,6 +26,7 @@ namespace Reflectrix.CameraController
             }
 
             this.controls = controls;
+            this.cameraController = cameraController;
 
             controls.Camera.TouchDelta.performed += OnTouchDelta;
 
@@ -81,7 +82,7 @@ namespace Reflectrix.CameraController
 
         private void Update()
         {
-            if (isInitialized)
+            if (!isInitialized)
             {
                 return;
             }
