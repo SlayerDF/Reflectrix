@@ -1,3 +1,4 @@
+using Reflectrix.LaserBeam;
 using Reflectrix.Traits;
 using UniTrait;
 using UnityEngine;
@@ -39,6 +40,11 @@ namespace Reflectrix.Entities.Devices
         }
 
         #endregion
+
+        public LaserBeamPoint[] Emit()
+        {
+            return laserEmitterTrait.Emit();
+        }
 
         private void OnEmitterDestroyed(DestructibleTrait.DestroyedEvent @event)
         {

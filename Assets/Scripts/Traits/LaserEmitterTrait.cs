@@ -1,5 +1,5 @@
 using System;
-using LaserBeam;
+using Reflectrix.LaserBeam;
 using UniTrait;
 using UnityEngine;
 
