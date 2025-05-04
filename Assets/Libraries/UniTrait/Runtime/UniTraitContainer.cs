@@ -145,13 +145,15 @@ namespace UniTrait
 
         public void AddTrait<T>(T trait) where T : IUniTrait
         {
-            if (traitsIndexes.ContainsKey(typeof(T)))
+            var type = trait.GetType();
+
+            if (traitsIndexes.ContainsKey(type))
             {
-                throw new ArgumentException($"Trait of type {typeof(T)} already exists");
+                throw new ArgumentException($"Trait of type {type} already exists");
             }
 
             traitsList.Add(trait);
-            traitsIndexes[typeof(T)] = traitsList.Count - 1;
+            traitsIndexes[type] = traitsList.Count - 1;
 
             trait.InjectContainer(this);
             trait.InjectEventBus(eventBus);
@@ -168,6 +170,11 @@ namespace UniTrait
         public T GetTrait<T>() where T : IUniTrait
         {
             return traitsIndexes.TryGetValue(typeof(T), out var traitIndex) ? (T)traitsList[traitIndex] : default;
+        }
+
+        public IEnumerable<IUniTrait> GetTraits()
+        {
+            return traitsList;
         }
 
         private void AutoAddTraits()

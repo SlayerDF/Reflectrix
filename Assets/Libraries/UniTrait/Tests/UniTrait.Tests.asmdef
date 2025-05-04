@@ -1,5 +1,5 @@
 {
-    "name": "UniTraits.Tests",
+    "name": "UniTrait.Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
