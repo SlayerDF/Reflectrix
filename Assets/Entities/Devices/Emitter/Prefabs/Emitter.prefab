@@ -54,6 +54,8 @@ MonoBehaviour:
       intensity: 1
       intensityMultiplier: 0
     debugMode: 1
+  rotatableTrait:
+    rotationAngleStep: 90
 --- !u!1 &4601532213170837060
 GameObject:
   m_ObjectHideFlags: 0
