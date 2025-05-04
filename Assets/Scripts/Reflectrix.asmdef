@@ -1,0 +1,16 @@
+{
+    "name": "Reflectrix",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ddf8cf203308a3f46aa40ec3edeb1535"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
