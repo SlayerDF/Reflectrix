@@ -9,7 +9,7 @@ namespace UniTrait
     {
         private readonly Dictionary<Type, int> traitsIndexes = new();
         private readonly List<IUniTrait> traitsList = new();
-        private readonly UniTraitEventBus eventBus = new();
+        protected readonly UniTraitEventBus EventBus = new();
 
         #region Event Functions
 
@@ -156,7 +156,7 @@ namespace UniTrait
             traitsIndexes[type] = traitsList.Count - 1;
 
             trait.InjectContainer(this);
-            trait.InjectEventBus(eventBus);
+            trait.InjectEventBus(EventBus);
         }
 
         public void AddTraits<T>(params T[] traits) where T : IUniTrait
