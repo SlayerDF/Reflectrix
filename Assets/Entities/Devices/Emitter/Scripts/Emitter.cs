@@ -16,6 +16,10 @@ namespace Reflectrix.Entities.Devices
         [AutoAddTrait]
         private DestructibleTrait destructibleTrait;
 
+        [SerializeField]
+        [AutoAddTrait]
+        private OnDestroyFXTrait onDestroyFXTrait;
+
         #endregion
 
         #region Event Functions
