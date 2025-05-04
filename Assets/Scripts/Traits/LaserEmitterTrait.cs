@@ -20,7 +20,14 @@ namespace Reflectrix.Traits
 
         #endregion
 
+        private UniTraitEventBus eventBus;
+
         #region IUniTrait Members
+
+        public void InjectEventBus(UniTraitEventBus bus)
+        {
+            eventBus = bus;
+        }
 
 # if UNITY_EDITOR
         public void OnDrawGizmos()
@@ -46,7 +53,18 @@ namespace Reflectrix.Traits
 
         public LaserBeamPoint[] Emit()
         {
+            eventBus.Publish(new EmittedEvent { Points = emissionPoints });
+
             return emissionPoints;
         }
+
+        #region Nested type: ${0}
+
+        public struct EmittedEvent
+        {
+            public LaserBeamPoint[] Points;
+        }
+
+        #endregion
     }
 }

@@ -7,12 +7,6 @@ namespace Reflectrix.Traits
     [Serializable]
     public class DestructibleTrait : IUniTrait
     {
-        #region Delegates
-
-        public delegate void DestructionHandler(UniTraitContainer container, DestructionReason reason);
-
-        #endregion
-
         #region DestructionReason enum
 
         public enum DestructionReason
@@ -24,6 +18,7 @@ namespace Reflectrix.Traits
         #endregion
 
         private UniTraitContainer container;
+        private UniTraitEventBus eventBus;
 
         public bool IsDestroyed { get; private set; }
 
@@ -34,17 +29,29 @@ namespace Reflectrix.Traits
             container = cont;
         }
 
-        #endregion
+        public void InjectEventBus(UniTraitEventBus bus)
+        {
+            eventBus = bus;
+        }
 
-        public event DestructionHandler OnDestroyed;
+        #endregion
 
         public void Destroy(DestructionReason reason)
         {
             IsDestroyed = true;
 
-            OnDestroyed?.Invoke(container, reason);
+            eventBus.Publish(new DestroyedEvent { Reason = reason });
 
             Object.Destroy(container.gameObject);
         }
+
+        #region Nested type: ${0}
+
+        public struct DestroyedEvent
+        {
+            public DestructionReason Reason;
+        }
+
+        #endregion
     }
 }
