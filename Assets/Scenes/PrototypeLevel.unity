@@ -654,8 +654,8 @@ MonoBehaviour:
   levelGrid: {fileID: 1676067563}
   cameraObject: {fileID: 303856389}
   inputManager: {fileID: 1916615534}
-  panSpeed: 1
-  zoomSpeed: 0.1
+  panSpeed: 0.2
+  zoomSpeed: 0.4
   minZoom: 1
   maxZoom: 5
 --- !u!1 &1646766130

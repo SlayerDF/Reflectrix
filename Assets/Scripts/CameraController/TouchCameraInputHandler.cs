@@ -5,15 +5,12 @@ namespace Reflectrix.CameraController
 {
     public class TouchCameraInputHandler : MonoBehaviour, ICameraInputHandler
     {
-        private Vector2 touch1Position;
-        private Vector2 touch2Position;
-        private bool isTouching1;
-        private bool isTouching2;
-        private float previousTouchDistance;
-        private Vector2? panInput;
         private bool isInitialized;
         private CameraController cameraController;
         private PlayerControls controls;
+        private bool isTouching1;
+        private bool isTouching2;
+        private Vector2? panInput;
         private float previousDistance = 0f;
 
         /// <inheritdoc />
@@ -65,7 +62,6 @@ namespace Reflectrix.CameraController
 
         private void OnTouch1Performed(InputAction.CallbackContext context)
         {
-            touch1Position = context.ReadValue<Vector2>();
             isTouching1 = true;
         }
 
@@ -76,7 +72,6 @@ namespace Reflectrix.CameraController
 
         private void OnTouch2Performed(InputAction.CallbackContext context)
         {
-            touch2Position = context.ReadValue<Vector2>();
             isTouching2 = true;
         }
 
@@ -88,27 +83,31 @@ namespace Reflectrix.CameraController
             }
 
             // Apply pan logic.
-            if (isTouching1 && !isTouching2)
+            if (isTouching1 && !isTouching2 && panInput.HasValue)
             {
-                if (panInput.HasValue)
-                {
-                    cameraController.ApplyPan(panInput.Value);
-                    panInput = null;
-                }
+                cameraController.ApplyPan(panInput.Value);
+                isTouching1 = false;
+                panInput = null;
             }
 
             // Apply zoom logic.
             if (isTouching1 && isTouching2)
             {
-                float currentDistance = Vector2.Distance(touch1Position, touch2Position);
+                // We have to read current finger positions every frame.
+                var touch1 = Touchscreen.current.touches[0].position.ReadValue();
+                var touch2 = Touchscreen.current.touches[1].position.ReadValue();
+
+                float currentDistance = Vector2.Distance(touch1, touch2);
 
                 if (previousDistance > 0f)
                 {
-                    float delta = previousDistance - currentDistance;
-                    cameraController.ApplyZoom(Mathf.Sign(delta)); // scale factor
+                    float delta = currentDistance - previousDistance;
+                    cameraController.ApplyZoom(delta * 0.01f); // Negative = pinch in
                 }
 
                 previousDistance = currentDistance;
+                isTouching1 = false;
+                isTouching2 = false;
             }
             else
             {

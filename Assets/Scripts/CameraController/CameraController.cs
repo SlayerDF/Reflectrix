@@ -43,7 +43,7 @@ namespace Reflectrix.CameraController
 
         private void Awake()
         {
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
             var cameraInput = Instantiate(touchCameraInputHandlerPrefab);
             cameraInputGameObject = cameraInput.gameObject;
             cameraInputHandler = cameraInput;
