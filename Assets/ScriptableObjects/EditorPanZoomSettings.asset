@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d5f13a967af624dbaed563a5f9fbdd, type: 3}
   m_Name: EditorPanZoomSettings
   m_EditorClassIdentifier: 
-  panSpeed: 1
+  panSpeed: 0.33
   zoomSpeed: 0.1
   minZoom: 1
   maxZoom: 5

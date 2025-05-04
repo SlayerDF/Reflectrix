@@ -26,9 +26,12 @@ namespace Reflectrix.CameraController
         private float cameraHalfWidth;
         private float cameraHalfHeight;
         private BoundsInt mapBounds;
+        private float currentZoom;
 
         private void Awake()
         {
+            currentZoom = cameraObject.orthographicSize;
+
 #if UNITY_ANDROID && !UNITY_EDITOR
             var cameraInput = Instantiate(touchCameraInputHandlerPrefab);
             cameraInputGameObject = cameraInput.gameObject;
@@ -58,6 +61,7 @@ namespace Reflectrix.CameraController
         {
             var newSize = cameraObject.orthographicSize - zoomValue * zoomSpeed;
             cameraObject.orthographicSize = Mathf.Clamp(newSize, minZoom, maxZoom);
+            currentZoom = cameraObject.orthographicSize;
 
             // Adjust the camera position to keep it within bounds.
             SetClampedCameraPosition(cameraObject.transform.position);
@@ -65,7 +69,8 @@ namespace Reflectrix.CameraController
 
         public void ApplyPan(Vector3 delta, float panSpeed)
         {
-            var moveDirection = panSpeed * Time.deltaTime * delta;
+            var speed = panSpeed * currentZoom;
+            var moveDirection = speed * Time.deltaTime * delta;
             var updatedPosition = cameraObject.transform.position - moveDirection;
             SetClampedCameraPosition(updatedPosition);
         }
