@@ -200,17 +200,17 @@ namespace UniTrait
         }
 
 # if UNITY_EDITOR
-        protected void OnDrawGizmos()
+        protected virtual void OnDrawGizmos()
         {
             ManualDrawGizmos();
         }
 
-        protected void OnDrawGizmosSelected()
+        protected virtual void OnDrawGizmosSelected()
         {
             ManualDrawGizmosSelected();
         }
 
-        protected void OnValidate()
+        protected virtual void OnValidate()
         {
             traitsList.Clear();
             traitsIndexes.Clear();
