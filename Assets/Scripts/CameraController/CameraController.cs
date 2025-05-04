@@ -19,20 +19,6 @@ namespace Reflectrix.CameraController
         [SerializeField]
         private InputManager inputManager;
 
-        [Header("Pan Settings")]
-        [SerializeField]
-        private float panSpeed = 1f;
-
-        [Header("Zoom Settings")]
-        [SerializeField]
-        private float zoomSpeed = 0.1f;
-
-        [SerializeField]
-        private float minZoom = 1f;
-
-        [SerializeField]
-        private float maxZoom = 100;
-
         private ICameraInputHandler cameraInputHandler;
 
         private GameObject cameraInputGameObject;
@@ -68,7 +54,7 @@ namespace Reflectrix.CameraController
             }
         }
 
-        public void ApplyZoom(float zoomValue)
+        public void ApplyZoom(float zoomValue, float zoomSpeed, float minZoom, float maxZoom)
         {
             var newSize = cameraObject.orthographicSize - zoomValue * zoomSpeed;
             cameraObject.orthographicSize = Mathf.Clamp(newSize, minZoom, maxZoom);
@@ -77,7 +63,7 @@ namespace Reflectrix.CameraController
             SetClampedCameraPosition(cameraObject.transform.position);
         }
 
-        public void ApplyPan(Vector3 delta)
+        public void ApplyPan(Vector3 delta, float panSpeed)
         {
             var moveDirection = panSpeed * Time.deltaTime * delta;
             var updatedPosition = cameraObject.transform.position - moveDirection;

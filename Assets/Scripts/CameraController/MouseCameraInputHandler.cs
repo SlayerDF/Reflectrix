@@ -5,6 +5,9 @@ namespace Reflectrix.CameraController
 {
     public class MouseCameraInputHandler : MonoBehaviour, ICameraInputHandler
     {
+        [SerializeField]
+        private PanZoomSettigns panZoomSettigns;
+
         private Vector2? panInput;
         private float? zoomDelta;
         private bool isInitialized;
@@ -73,13 +76,13 @@ namespace Reflectrix.CameraController
 
             if (panInput.HasValue)
             {
-                cameraController.ApplyPan(panInput.Value);
+                cameraController.ApplyPan(panInput.Value, panZoomSettigns.PanSpeed);
                 panInput = null;
             }
 
             if (zoomDelta.HasValue)
             {
-                cameraController.ApplyZoom(zoomDelta.Value);
+                cameraController.ApplyZoom(zoomDelta.Value, panZoomSettigns.ZoomSpeed, panZoomSettigns.MinZoom, panZoomSettigns.MaxZoom);
                 zoomDelta = null;
             }
         }

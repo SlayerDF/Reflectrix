@@ -5,6 +5,9 @@ namespace Reflectrix.CameraController
 {
     public class TouchCameraInputHandler : MonoBehaviour, ICameraInputHandler
     {
+        [SerializeField]
+        private PanZoomSettigns panZoomSettigns;
+
         private bool isInitialized;
         private CameraController cameraController;
         private PlayerControls controls;
@@ -85,7 +88,7 @@ namespace Reflectrix.CameraController
             // Apply pan logic.
             if (isTouching1 && !isTouching2 && panInput.HasValue)
             {
-                cameraController.ApplyPan(panInput.Value);
+                cameraController.ApplyPan(panInput.Value, panZoomSettigns.PanSpeed);
                 isTouching1 = false;
                 panInput = null;
             }
@@ -102,7 +105,7 @@ namespace Reflectrix.CameraController
                 if (previousDistance > 0f)
                 {
                     float delta = currentDistance - previousDistance;
-                    cameraController.ApplyZoom(delta * 0.01f); // Negative = pinch in
+                    cameraController.ApplyZoom(delta * 0.01f, panZoomSettigns.ZoomSpeed, panZoomSettigns.MinZoom, panZoomSettigns.MaxZoom);
                 }
 
                 previousDistance = currentDistance;

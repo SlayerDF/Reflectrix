@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd0340f8d4f97042a8c6b1f3927d274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panZoomSettigns: {fileID: 11400000, guid: bd7c830f47216c34fb5e547cdbac1fc1, type: 2}
