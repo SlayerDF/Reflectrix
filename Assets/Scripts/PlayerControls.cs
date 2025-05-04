@@ -28,7 +28,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""d4364397-bee9-4848-bf78-eb27216af2bf"",
             ""actions"": [
                 {
-                    ""name"": ""Pan"",
+                    ""name"": ""MousePan"",
                     ""type"": ""Value"",
                     ""id"": ""a38f38f3-9e84-4736-bd49-e64ea02182b5"",
                     ""expectedControlType"": ""Vector2"",
@@ -38,12 +38,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""MouseZoom"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""181064a6-c0ac-452e-a2a3-260e9aa7ddda"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""PrimaryFingerPosition"",
@@ -64,13 +64,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""SecondaryTouchContact"",
-                    ""type"": ""Button"",
-                    ""id"": ""6596e1c1-1def-4693-a915-95ea769fbfc5"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""TouchDelta"",
+                    ""type"": ""Value"",
+                    ""id"": ""50b460ca-e771-44af-800c-8a0c0e4600ce"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -81,7 +81,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Pan"",
+                    ""action"": ""MousePan"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -92,18 +92,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Pan"",
+                    ""action"": ""MousePan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""binding"",
                     ""id"": ""f4a4d987-c022-4f68-b56c-a351f6aa0711"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Pan"",
+                    ""action"": ""MousePan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -131,23 +131,23 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ea599efa-5de5-4477-b37d-235463d7dbed"",
-                    ""path"": ""<Touchscreen>/touch1/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SecondaryTouchContact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""ac35cf0f-37af-4df5-8e9f-2394ac399694"",
                     ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MouseZoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5473d8ae-9e1a-44a6-a2f3-2c7aabe7bf44"",
+                    ""path"": ""<Touchscreen>/touch0/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -158,11 +158,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
 }");
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
-        m_Camera_Pan = m_Camera.FindAction("Pan", throwIfNotFound: true);
+        m_Camera_MousePan = m_Camera.FindAction("MousePan", throwIfNotFound: true);
         m_Camera_MouseZoom = m_Camera.FindAction("MouseZoom", throwIfNotFound: true);
         m_Camera_PrimaryFingerPosition = m_Camera.FindAction("PrimaryFingerPosition", throwIfNotFound: true);
         m_Camera_SecondaryFingerPosition = m_Camera.FindAction("SecondaryFingerPosition", throwIfNotFound: true);
-        m_Camera_SecondaryTouchContact = m_Camera.FindAction("SecondaryTouchContact", throwIfNotFound: true);
+        m_Camera_TouchDelta = m_Camera.FindAction("TouchDelta", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -224,20 +224,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // Camera
     private readonly InputActionMap m_Camera;
     private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
-    private readonly InputAction m_Camera_Pan;
+    private readonly InputAction m_Camera_MousePan;
     private readonly InputAction m_Camera_MouseZoom;
     private readonly InputAction m_Camera_PrimaryFingerPosition;
     private readonly InputAction m_Camera_SecondaryFingerPosition;
-    private readonly InputAction m_Camera_SecondaryTouchContact;
+    private readonly InputAction m_Camera_TouchDelta;
     public struct CameraActions
     {
         private @PlayerControls m_Wrapper;
         public CameraActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Pan => m_Wrapper.m_Camera_Pan;
+        public InputAction @MousePan => m_Wrapper.m_Camera_MousePan;
         public InputAction @MouseZoom => m_Wrapper.m_Camera_MouseZoom;
         public InputAction @PrimaryFingerPosition => m_Wrapper.m_Camera_PrimaryFingerPosition;
         public InputAction @SecondaryFingerPosition => m_Wrapper.m_Camera_SecondaryFingerPosition;
-        public InputAction @SecondaryTouchContact => m_Wrapper.m_Camera_SecondaryTouchContact;
+        public InputAction @TouchDelta => m_Wrapper.m_Camera_TouchDelta;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -247,9 +247,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
-            @Pan.started += instance.OnPan;
-            @Pan.performed += instance.OnPan;
-            @Pan.canceled += instance.OnPan;
+            @MousePan.started += instance.OnMousePan;
+            @MousePan.performed += instance.OnMousePan;
+            @MousePan.canceled += instance.OnMousePan;
             @MouseZoom.started += instance.OnMouseZoom;
             @MouseZoom.performed += instance.OnMouseZoom;
             @MouseZoom.canceled += instance.OnMouseZoom;
@@ -259,16 +259,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SecondaryFingerPosition.started += instance.OnSecondaryFingerPosition;
             @SecondaryFingerPosition.performed += instance.OnSecondaryFingerPosition;
             @SecondaryFingerPosition.canceled += instance.OnSecondaryFingerPosition;
-            @SecondaryTouchContact.started += instance.OnSecondaryTouchContact;
-            @SecondaryTouchContact.performed += instance.OnSecondaryTouchContact;
-            @SecondaryTouchContact.canceled += instance.OnSecondaryTouchContact;
+            @TouchDelta.started += instance.OnTouchDelta;
+            @TouchDelta.performed += instance.OnTouchDelta;
+            @TouchDelta.canceled += instance.OnTouchDelta;
         }
 
         private void UnregisterCallbacks(ICameraActions instance)
         {
-            @Pan.started -= instance.OnPan;
-            @Pan.performed -= instance.OnPan;
-            @Pan.canceled -= instance.OnPan;
+            @MousePan.started -= instance.OnMousePan;
+            @MousePan.performed -= instance.OnMousePan;
+            @MousePan.canceled -= instance.OnMousePan;
             @MouseZoom.started -= instance.OnMouseZoom;
             @MouseZoom.performed -= instance.OnMouseZoom;
             @MouseZoom.canceled -= instance.OnMouseZoom;
@@ -278,9 +278,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SecondaryFingerPosition.started -= instance.OnSecondaryFingerPosition;
             @SecondaryFingerPosition.performed -= instance.OnSecondaryFingerPosition;
             @SecondaryFingerPosition.canceled -= instance.OnSecondaryFingerPosition;
-            @SecondaryTouchContact.started -= instance.OnSecondaryTouchContact;
-            @SecondaryTouchContact.performed -= instance.OnSecondaryTouchContact;
-            @SecondaryTouchContact.canceled -= instance.OnSecondaryTouchContact;
+            @TouchDelta.started -= instance.OnTouchDelta;
+            @TouchDelta.performed -= instance.OnTouchDelta;
+            @TouchDelta.canceled -= instance.OnTouchDelta;
         }
 
         public void RemoveCallbacks(ICameraActions instance)
@@ -300,10 +300,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public CameraActions @Camera => new CameraActions(this);
     public interface ICameraActions
     {
-        void OnPan(InputAction.CallbackContext context);
+        void OnMousePan(InputAction.CallbackContext context);
         void OnMouseZoom(InputAction.CallbackContext context);
         void OnPrimaryFingerPosition(InputAction.CallbackContext context);
         void OnSecondaryFingerPosition(InputAction.CallbackContext context);
-        void OnSecondaryTouchContact(InputAction.CallbackContext context);
+        void OnTouchDelta(InputAction.CallbackContext context);
     }
 }

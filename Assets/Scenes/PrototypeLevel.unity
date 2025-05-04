@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 303856389}
   - component: {fileID: 303856388}
   - component: {fileID: 303856392}
-  - component: {fileID: 303856391}
+  - component: {fileID: 303856393}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -593,25 +593,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &303856391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 303856387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2017e293936633543998ae7784fca2d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panSpeed: 1
-  zoomSpeed: 0.1
-  minZoom: 5
-  maxZoom: 15
-  cameraObject: {fileID: 303856389}
-  levelGrid: {fileID: 1676067563}
-  inputManager: {fileID: 1916615534}
 --- !u!114 &303856392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,6 +637,27 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &303856393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303856387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d01ca20b50604140ab45145ef1fa7b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseCameraInputHandlerPrefab: {fileID: 8686949625976792777, guid: 8bace8dd04fdc614cabdc022af2e4dc5, type: 3}
+  touchCameraInputHandlerPrefab: {fileID: 5944586989698437642, guid: d7ff9ae155fceca43aa54f8dafea4d9e, type: 3}
+  levelGrid: {fileID: 1676067563}
+  cameraObject: {fileID: 303856389}
+  inputManager: {fileID: 1916615534}
+  panSpeed: 1
+  zoomSpeed: 0.1
+  minZoom: 1
+  maxZoom: 5
 --- !u!1 &1646766130
 GameObject:
   m_ObjectHideFlags: 0

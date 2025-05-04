@@ -6,7 +6,7 @@
             "id": "d4364397-bee9-4848-bf78-eb27216af2bf",
             "actions": [
                 {
-                    "name": "Pan",
+                    "name": "MousePan",
                     "type": "Value",
                     "id": "a38f38f3-9e84-4736-bd49-e64ea02182b5",
                     "expectedControlType": "Vector2",
@@ -16,12 +16,12 @@
                 },
                 {
                     "name": "MouseZoom",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "181064a6-c0ac-452e-a2a3-260e9aa7ddda",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "PrimaryFingerPosition",
@@ -42,13 +42,13 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SecondaryTouchContact",
-                    "type": "Button",
-                    "id": "6596e1c1-1def-4693-a915-95ea769fbfc5",
-                    "expectedControlType": "Button",
+                    "name": "TouchDelta",
+                    "type": "Value",
+                    "id": "50b460ca-e771-44af-800c-8a0c0e4600ce",
+                    "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -59,7 +59,7 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "Pan",
+                    "action": "MousePan",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -70,18 +70,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pan",
+                    "action": "MousePan",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "binding",
                     "id": "f4a4d987-c022-4f68-b56c-a351f6aa0711",
-                    "path": "<Mouse>/delta",
+                    "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pan",
+                    "action": "MousePan",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -109,23 +109,23 @@
                 },
                 {
                     "name": "",
-                    "id": "ea599efa-5de5-4477-b37d-235463d7dbed",
-                    "path": "<Touchscreen>/touch1/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SecondaryTouchContact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ac35cf0f-37af-4df5-8e9f-2394ac399694",
                     "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "MouseZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5473d8ae-9e1a-44a6-a2f3-2c7aabe7bf44",
+                    "path": "<Touchscreen>/touch0/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchDelta",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
