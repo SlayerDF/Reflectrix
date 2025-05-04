@@ -14,8 +14,34 @@ namespace Reflectrix.Entities.Devices
 
         [SerializeField]
         [AutoAddTrait]
-        private RotatableTrait rotatableTrait;
+        private DestructibleTrait destructibleTrait;
 
         #endregion
+
+        #region Event Functions
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            EventBus.Subscribe<DestructibleTrait.DestroyedEvent>(OnEmitterDestroyed);
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            EventBus.Unsubscribe<DestructibleTrait.DestroyedEvent>(OnEmitterDestroyed);
+        }
+
+        #endregion
+
+        private void OnEmitterDestroyed(DestructibleTrait.DestroyedEvent @event)
+        {
+            if (@event.Reason == DestructibleTrait.DestructionReason.LaserBeam)
+            {
+                // TODO: display game over screen
+            }
+        }
     }
 }
