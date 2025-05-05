@@ -1,3 +1,4 @@
+using Reflectrix.RemoteConfig;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,11 @@ namespace Reflectrix
         #endregion
 
         #region Event Functions
+
+        private void Awake()
+        {
+            _ = RemoteConfigFetcher.FetchConfig();
+        }
 
         private void Update()
         {
