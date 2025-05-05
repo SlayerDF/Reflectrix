@@ -1,7 +1,9 @@
 ﻿using Reflectrix.Entities.Devices;
 using Reflectrix.LaserBeam;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Reflectrix
 {
@@ -26,6 +28,8 @@ namespace Reflectrix
         private int tileMapSize;
 
         private BoundsInt tileBounds;
+
+        private Dictionary<Vector3Int, Color> occupiedTiles = new();
 
         private void Start()
         {
@@ -67,6 +71,21 @@ namespace Reflectrix
                 if (levelGrid.FloorTileMap.GetTile(currentTile) == null)
                     break;
 
+                // Check if the tile is already occupied by another laser beam.
+                if (occupiedTiles.ContainsKey(currentTile))
+                {
+                    if (occupiedTiles[currentTile] != laserBeam.Color)
+                    {
+                        path.Add(currentWorldPos);
+                        drawLineEnd = false;
+                        SpawnIntersectionFX(currentWorldPos);
+                        break;
+                    }
+                }
+
+                occupiedTiles[currentTile] = laserBeam.Color;
+
+                // Check if there is an obstacle in the way.
                 var hit = Physics2D.Raycast(currentWorldPos, step, stepSize, obstaclesLayerMask);
                 if (hit.collider != null)
                 {
@@ -92,8 +111,9 @@ namespace Reflectrix
             if (path.Count >= 2)
             {
                 var line = Instantiate(linePrefab);
-                line.startWidth = laserBeam.Intensity * rayWidthMultiplier;
-                line.endWidth = laserBeam.Intensity * rayWidthMultiplier;
+                var baseWidth = laserBeam.Intensity * rayWidthMultiplier;
+                line.startWidth = baseWidth;
+                line.endWidth = baseWidth;
                 line.startColor = laserBeam.Color;
                 line.endColor = laserBeam.Color;
 
@@ -103,7 +123,12 @@ namespace Reflectrix
             }
         }
 
-        private void ClearLines()
+        private void SpawnIntersectionFX(Vector3 currentWorldPos)
+        {
+            // TODO: Spawn intersection FX
+        }
+
+        private void Clear()
         {
             for (int i = 0; i < activeLines.Count; i++)
             {
@@ -113,11 +138,13 @@ namespace Reflectrix
                 }
             }
             activeLines.Clear();
+
+            occupiedTiles.Clear();
         }
 
         private void OnDestroy()
         {
-            ClearLines();
+            Clear();
         }
     }
 }

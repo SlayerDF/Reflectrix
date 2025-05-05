@@ -193,7 +193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.519
+      value: -5.42
       objectReference: {fileID: 0}
     - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1580,6 +1580,140 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7706488489265205712, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
   m_PrefabInstance: {fileID: 312605007}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &391042658
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 638694673911649626, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 638694673911649626, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: laserEmitterTrait.emissionPoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: laserEmitterTrait.emissionPoints.Array.data[1].origin
+      value: 
+      objectReference: {fileID: 391042660}
+    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].color.b
+      value: 0.95643556
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].color.g
+      value: 0.9622642
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].color.r
+      value: 0.44028127
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: laserEmitterTrait.emissionPoints.Array.data[1].direction
+      value: 
+      objectReference: {fileID: 391042659}
+    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: laserEmitterTrait.emissionPoints.Array.data[1].intensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].intensityMultiplier
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076132930153237207, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_Name
+      value: Emitter (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7312840903988012627, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706488489265205712, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706488489265205712, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+--- !u!4 &391042659 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 638694673911649626, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+  m_PrefabInstance: {fileID: 391042658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &391042660 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7706488489265205712, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+  m_PrefabInstance: {fileID: 391042658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &391042661 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
+  m_PrefabInstance: {fileID: 391042658}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25e810cd58b1cb647855c51239ec0fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &419153202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1602,15 +1736,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
       propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].color.b
-      value: 0.95643556
+      value: 0.43921566
       objectReference: {fileID: 0}
     - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
       propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].color.g
-      value: 0.9622642
+      value: 0.9607843
       objectReference: {fileID: 0}
     - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
       propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].color.r
-      value: 0.44028127
+      value: 0.79579186
       objectReference: {fileID: 0}
     - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
       propertyPath: laserEmitterTrait.emissionPoints.Array.data[1].direction
@@ -1681,17 +1815,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
---- !u!114 &538732460 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-  m_PrefabInstance: {fileID: 1037157833}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25e810cd58b1cb647855c51239ec0fa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &920365655 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
@@ -1707,117 +1830,6 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 638694673911649626, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
   m_PrefabInstance: {fileID: 419153202}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1037157833
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: laserEmitterTrait.emissionPoints.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: laserEmitterTrait.emissionPoints.Array.data[1].origin
-      value: 
-      objectReference: {fileID: 1037157835}
-    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].color.b
-      value: 0.95643556
-      objectReference: {fileID: 0}
-    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].color.g
-      value: 0.9622642
-      objectReference: {fileID: 0}
-    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].color.r
-      value: 0.44028127
-      objectReference: {fileID: 0}
-    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: laserEmitterTrait.emissionPoints.Array.data[1].direction
-      value: 
-      objectReference: {fileID: 1037157834}
-    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: laserEmitterTrait.emissionPoints.Array.data[1].intensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1463151794256871715, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: laserEmitterTrait.emissionPoints.Array.data[0].intensityMultiplier
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.503
-      objectReference: {fileID: 0}
-    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.565
-      objectReference: {fileID: 0}
-    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2427139928503229537, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3076132930153237207, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_Name
-      value: Emitter (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7312840903988012627, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7706488489265205712, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
---- !u!4 &1037157834 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 638694673911649626, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-  m_PrefabInstance: {fileID: 1037157833}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1037157835 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7706488489265205712, guid: cb1a7b2fe8088b24987469ba60ee539a, type: 3}
-  m_PrefabInstance: {fileID: 1037157833}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1464741579 stripped
 MonoBehaviour:
@@ -3742,9 +3754,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emitters:
   - {fileID: 73394318}
-  - {fileID: 538732460}
   - {fileID: 920365655}
   - {fileID: 1464741579}
+  - {fileID: 391042661}
   levelGrid: {fileID: 1676067563}
   linePrefab: {fileID: 6492918174505166901, guid: 65aa537aee2820844b6d55a689b358ee, type: 3}
   obstaclesLayerMask:
@@ -3758,7 +3770,7 @@ SceneRoots:
   - {fileID: 1676067562}
   - {fileID: 1916615533}
   - {fileID: 419153202}
-  - {fileID: 1037157833}
   - {fileID: 312605007}
   - {fileID: 107881032}
+  - {fileID: 391042658}
   - {fileID: 1919212805}
