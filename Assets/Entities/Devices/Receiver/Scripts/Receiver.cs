@@ -11,11 +11,12 @@ namespace Reflectrix.Entities.Devices
         #region Serialized Fields
 
         [SerializeField]
+        private float targetIntensity;
+
+        [Header("Traits")]
+        [SerializeField]
         [AutoAddTrait]
         private LaserReceiverTrait laserReceiverTrait;
-
-        [SerializeField]
-        private float targetIntensity;
 
         #endregion
 

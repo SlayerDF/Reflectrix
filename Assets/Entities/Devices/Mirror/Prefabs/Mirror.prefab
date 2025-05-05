@@ -175,8 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9091e0d3c6b440a68d0865f9a3362a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  incomeBeams:
-  - origin: {fileID: 0}
-    direction: {fileID: 0}
-    intensity: 0
   mirrorCollider: {fileID: 2186689124614373824}
+  rotatableTrait:
+    rotationAngleStep: 45
