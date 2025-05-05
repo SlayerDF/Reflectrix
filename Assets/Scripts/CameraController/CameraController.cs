@@ -64,7 +64,8 @@ namespace Reflectrix.CameraController
             currentZoom = cameraObject.orthographicSize;
 
             // Adjust the camera position to keep it within bounds.
-            SetClampedCameraPosition(cameraObject.transform.position);
+            var cameraPosition = cameraObject.transform.position;
+            SetClampedCameraPosition(cameraPosition);
         }
 
         public void ApplyPan(Vector3 delta, float panSpeed)
