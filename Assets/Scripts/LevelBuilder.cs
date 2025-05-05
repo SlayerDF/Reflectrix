@@ -10,6 +10,8 @@ namespace Reflectrix
 {
     public class LevelBuilder : MonoBehaviour
     {
+        private const int MaxDevicesCount = 5;
+
         [SerializeField]
         private TilemapCollider2D tilemapCollider;
 
@@ -29,6 +31,8 @@ namespace Reflectrix
         private Merger mergerPrefab;
 
         private TileState[,] levelCells;
+
+        private int customDevices = 0;
 
         private void Start()
         {
@@ -93,16 +97,24 @@ namespace Reflectrix
             return true;
         }
 
-        public void OccupyCell(Vector3Int cell, TileObjectType tileObjectType)
+        public bool TryOccupyCell(Vector3Int cell, TileObjectType tileObjectType)
         {
+            if (customDevices >= MaxDevicesCount)
+            {
+                Debug.LogWarning($"Cannot add more devices, max devices count: {MaxDevicesCount}");
+                return false;
+            }
+
             var internalCell = ConvertCoordinatesToInternalFormat(cell, levelGrid.FloorTileMap.cellBounds.min);
             if (!ValidateCellCoordinates(internalCell))
             {
-                return;
+                return false;
             }
 
             var gameObject = CreateCustomObject(cell, tileObjectType);
             levelCells[internalCell.x, internalCell.y].OccupyTile(tileObjectType, gameObject);
+            customDevices++;
+            return true;
         }
 
         private GameObject CreateCustomObject(Vector3Int cell, TileObjectType tileObjectType)

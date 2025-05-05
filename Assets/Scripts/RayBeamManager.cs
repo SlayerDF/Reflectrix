@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Reflectrix.Entities.Devices;
 using Reflectrix.LaserBeam;
+using UniTrait;
 using UnityEngine;
 
 namespace Reflectrix
@@ -8,6 +9,7 @@ namespace Reflectrix
     public class RayBeamManager : MonoBehaviour
     {
         private const float rayWidthMultiplier = 0.05f;
+        private const bool canIntersect = false;
 
         #region Serialized Fields
 
@@ -23,13 +25,18 @@ namespace Reflectrix
         [SerializeField]
         private LayerMask obstaclesLayerMask;
 
-        #endregion
+        [SerializeField]
+        private LayerMask devicesLayerMask;
+
+        #endregion Serialized Fields
 
         private readonly List<LineRenderer> activeLines = new();
 
         private BoundsInt tileBounds;
 
         private readonly Dictionary<Vector3Int, Color> occupiedTiles = new();
+
+        private readonly HashSet<IBeamReceiverAndEmitter> visitedDevices = new();
 
         private int tileMapSize;
 
@@ -55,7 +62,7 @@ namespace Reflectrix
             Clear();
         }
 
-        #endregion
+        #endregion Event Functions
 
         private bool IsPointInBounds(Vector3Int point, BoundsInt bounds)
         {
@@ -63,6 +70,19 @@ namespace Reflectrix
                    point.y >= bounds.min.y &&
                    point.x <= bounds.max.x &&
                    point.y <= bounds.max.y;
+        }
+
+        private void Update()
+        {
+            Clear();
+            foreach (var emitter in emitters)
+            {
+                var points = emitter.Emit();
+                for (var i = 0; i < points.Length; i++)
+                {
+                    DrawRay(points[i]);
+                }
+            }
         }
 
         private void DrawRay(ILaserBeamPoint laserBeam)
@@ -86,8 +106,13 @@ namespace Reflectrix
                     break;
                 }
 
-                // Check if the tile is already occupied by another laser beam.
                 if (occupiedTiles.ContainsKey(currentTile))
+                {
+                    break;
+                }
+
+                // Check if the tile is already occupied by another laser beam.
+                if (!canIntersect && occupiedTiles.ContainsKey(currentTile))
                 {
                     if (occupiedTiles[currentTile] != laserBeam.Color)
                     {
@@ -107,6 +132,25 @@ namespace Reflectrix
                     path.Add(hit.point);
                     drawLineEnd = false;
                     break;
+                }
+
+                // Check if there is a device in the way.
+                var hitDevice = Physics2D.Raycast(currentWorldPos, step, stepSize, devicesLayerMask);
+                if (hitDevice.collider != null)
+                {
+                    var receiverAndEmitter = hitDevice.collider.gameObject.GetComponentInParent<IBeamReceiverAndEmitter>();
+                    if (receiverAndEmitter != null && !visitedDevices.Contains(receiverAndEmitter))
+                    {
+                        var emittedBeams = receiverAndEmitter.ReceiveAndEmit(new ILaserBeamPoint[]
+                        {
+                            new LaserBeamPoint(currentWorldPos, laserBeam.Direction, laserBeam.Intensity, laserBeam.Color)
+                        });
+
+                        foreach (var emitted in emittedBeams)
+                        {
+                            DrawRay(emitted);// Recurse for each new beam
+                        }
+                    }
                 }
 
                 path.Add(currentWorldPos);

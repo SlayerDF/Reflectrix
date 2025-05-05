@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3700013594544224518}
   - component: {fileID: 1778773732358830182}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Receiver2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1762562154691889209}
   - component: {fileID: 9145106764402992478}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8159468148287863177}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EmitterDirectionPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5354669303387132242}
   - component: {fileID: 4980302567375832378}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Merger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 282941785007317502}
   - component: {fileID: 7996942900030351612}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EmitterOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1533687658142855643}
   - component: {fileID: 8691917658290207192}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Receiver1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -105,7 +105,7 @@ namespace Reflectrix.PlayerController
         {
             var worldPos = mainCamera.ScreenToWorldPoint(devicesPanel.transform.position);
             var tile = levelGrid.Grid.WorldToCell(worldPos);
-            levelBuilder.OccupyCell(tile, tileObjectType);
+            levelBuilder.TryOccupyCell(tile, tileObjectType);
             devicesPanel.HideDevicesPanel();
         }
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3787607058960364120}
   - component: {fileID: 3482225406913073363}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5037889070890730670}
   - component: {fileID: 8638879136937541105}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Receiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6423209752628351597}
   - component: {fileID: 7962034751184496588}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Receiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1762562154691889209}
   - component: {fileID: 9145106764402992478}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8651647637090727910}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Emitter2DirectionPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8159468148287863177}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Emitter1DirectionPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5354669303387132242}
   - component: {fileID: 2657028978130010324}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Splitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3611163174324507770}
   - component: {fileID: 4426113200602942918}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Emitter2Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4030684932079118872}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Emitter1And2Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 282941785007317502}
   - component: {fileID: 7996942900030351612}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Emitter1Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1533687658142855643}
   - component: {fileID: 8691917658290207192}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Receiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2427139928503229537}
   - component: {fileID: 1463151794256871715}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Emitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2649042210857574716}
   - component: {fileID: 7312840903988012627}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7706488489265205712}
   - component: {fileID: 563691530862754969}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: OriginPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 638694673911649626}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DirectionPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
