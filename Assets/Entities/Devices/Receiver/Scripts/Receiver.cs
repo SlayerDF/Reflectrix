@@ -23,7 +23,7 @@ namespace Reflectrix.Entities.Devices
 
         #region IBeamReceiver Members
 
-        public bool Receive(LaserBeamPoint[] beamPoint)
+        public bool Receive(ILaserBeamPoint[] beamPoint)
         {
             UpdateIntensity(laserReceiverTrait.Receive(beamPoint).Sum(x => x.Intensity));
 
