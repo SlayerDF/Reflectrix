@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Reflectrix
+namespace Reflectrix.UI
 {
     public class SceneLoaderButton : MonoBehaviour
     {

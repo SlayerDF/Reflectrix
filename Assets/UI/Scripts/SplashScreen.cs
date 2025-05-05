@@ -1,8 +1,9 @@
+using Reflectrix.RemoteConfig;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-namespace Reflectrix
+namespace Reflectrix.UI
 {
     public class SplashScreen : MonoBehaviour
     {
@@ -14,6 +15,11 @@ namespace Reflectrix
         #endregion
 
         #region Event Functions
+
+        private void Awake()
+        {
+            _ = RemoteConfigFetcher.FetchConfig();
+        }
 
         private void Update()
         {
