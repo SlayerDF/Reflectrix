@@ -4,23 +4,26 @@ using UnityEngine;
 namespace Reflectrix.LaserBeam
 {
     [Serializable]
-    public struct LaserBeamPoint
+    public struct LaserBeamPoint : ILaserBeamPoint
     {
         [SerializeField]
-        private Transform origin;
+        private Vector3 origin;
 
         [SerializeField]
-        private Transform direction;
+        private Vector3 direction;
 
         [SerializeField]
         private float intensity;
 
-# if UNITY_EDITOR
-        public bool Initialized => origin != null && direction != null;
-#endif
+        public LaserBeamPoint(Vector3 origin, Vector3 direction, float intensity)
+        {
+            this.origin = origin;
+            this.direction = direction;
+            this.intensity = intensity;
+        }
 
-        public Vector3 Origin => origin.position;
-        public Vector3 Direction => (direction.position - origin.position).normalized;
+        public Vector3 Origin => origin;
+        public Vector3 Direction => direction;
         public float Intensity => intensity;
     }
 }

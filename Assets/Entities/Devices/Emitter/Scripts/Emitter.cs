@@ -41,7 +41,7 @@ namespace Reflectrix.Entities.Devices
 
         #endregion
 
-        public LaserBeamPoint[] Emit()
+        public ILaserBeamPoint[] Emit()
         {
             return laserEmitterTrait.Emit();
         }

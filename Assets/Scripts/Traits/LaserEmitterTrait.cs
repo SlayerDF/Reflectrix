@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Reflectrix.LaserBeam;
 using UniTrait;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Reflectrix.Traits
         #region Serialized Fields
 
         [SerializeField]
-        private LaserBeamPoint[] emissionPoints;
+        private LaserBeamPointInspector[] emissionPoints;
 
 # if UNITY_EDITOR
         [SerializeField]
@@ -51,18 +52,20 @@ namespace Reflectrix.Traits
 
         #endregion
 
-        public LaserBeamPoint[] Emit()
+        public ILaserBeamPoint[] Emit()
         {
-            eventBus.Publish(new EmittedEvent { Points = emissionPoints });
+            var points = emissionPoints.Cast<ILaserBeamPoint>().ToArray();
 
-            return emissionPoints;
+            eventBus.Publish(new EmittedEvent { Points = points });
+
+            return points;
         }
 
         #region Nested type: ${0}
 
         public struct EmittedEvent
         {
-            public LaserBeamPoint[] Points;
+            public ILaserBeamPoint[] Points;
         }
 
         #endregion

@@ -2,6 +2,6 @@
 {
     public interface IBeamReceiverAndEmitter
     {
-        LaserBeamPoint[] ReceiveAndEmit(LaserBeamPoint[] beamPoints);
+        ILaserBeamPoint[] ReceiveAndEmit(ILaserBeamPoint[] beamPoints);
     }
 }

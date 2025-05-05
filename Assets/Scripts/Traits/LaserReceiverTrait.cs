@@ -27,7 +27,7 @@ namespace Reflectrix.Traits
 
         #endregion
 
-        public LaserBeamPoint[] Receive(LaserBeamPoint[] beamPoints)
+        public ILaserBeamPoint[] Receive(ILaserBeamPoint[] beamPoints)
         {
             var receivedBeamPoints = beamPoints
                 .Where(beam => receivers.Any(r => IsPointOnRay(beam.Origin, beam.Direction, r.position)))
@@ -49,7 +49,7 @@ namespace Reflectrix.Traits
 
         public struct ReceivedEvent
         {
-            public LaserBeamPoint[] BeamPoints;
+            public ILaserBeamPoint[] BeamPoints;
         }
 
         #endregion
