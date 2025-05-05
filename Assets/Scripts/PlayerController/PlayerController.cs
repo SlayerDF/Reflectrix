@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Reflectrix.Assets.Scripts;
+using System;
+using UnityEngine;
 
 namespace Reflectrix.PlayerController
 {
@@ -22,6 +24,9 @@ namespace Reflectrix.PlayerController
         [SerializeField]
         private Camera mainCamera;
 
+        [SerializeField]
+        private DevicesPanel devicesPanel;
+
         private GameObject playerInputGameObject;
 
         private IPlayerInputHandler playerInputHandler;
@@ -37,6 +42,8 @@ namespace Reflectrix.PlayerController
             playerInputGameObject = playerInput.gameObject;
             playerInputHandler = playerInput;
 #endif
+
+            devicesPanel.OnDeviceSelected += OnDeviceSelected;
         }
 
         private void Start()
@@ -55,12 +62,20 @@ namespace Reflectrix.PlayerController
 
             if (!levelBuilder.IsCellFree(tile))
             {
+                // TODO: Add the logic for editing device rotation.
                 Debug.Log("Current tile is occupied.");
                 return;
             }
 
-            levelBuilder.UpdateCellState(tile, false);
-            Debug.Log($"UpdateCellState {tile.x}, {tile.y}");
+            devicesPanel.ShowDevicesPanel(screenPosition);
+        }
+
+        private void OnDeviceSelected(object sender, TileObjectType tileObjectType)
+        {
+            var worldPos = mainCamera.ScreenToWorldPoint(devicesPanel.transform.position);
+            var tile = levelGrid.Grid.WorldToCell(worldPos);
+            levelBuilder.OccupyCell(tile, tileObjectType);
+            devicesPanel.HideDevicesPanel();
         }
     }
 }

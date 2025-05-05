@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Reflectrix.PlayerController
@@ -8,6 +9,7 @@ namespace Reflectrix.PlayerController
         private PlayerController playerController;
         private PlayerControls controls;
         private bool isInitialized = false;
+        private bool processTouch = false;
 
         public void Initialize(PlayerController playerController, PlayerControls controls)
         {
@@ -33,8 +35,28 @@ namespace Reflectrix.PlayerController
             isInitialized = false;
         }
 
+        private void Update()
+        {
+            if (!isInitialized)
+            {
+                return;
+            }
+
+            if (processTouch)
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    var pointerPosition = Touchscreen.current.position.ReadValue();
+                    playerController.OnClick(pointerPosition);
+                }
+
+                processTouch = false;
+            }
+        }
+
         private void OnTouchPerformed(InputAction.CallbackContext context)
         {
+            processTouch = true;
         }
     }
 }

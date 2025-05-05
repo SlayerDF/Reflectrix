@@ -1,5 +1,8 @@
 using Reflectrix.Assets.Scripts;
+using Reflectrix.Entities.Devices;
+using Reflectrix.Entities.Devices.Merger.Scripts;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -16,6 +19,15 @@ namespace Reflectrix
         [SerializeField]
         private List<GameObject> predefinedGameObjects = new();
 
+        [SerializeField]
+        private Mirror mirrorPrefab;
+
+        [SerializeField]
+        private Splitter splitterPrefab;
+
+        [SerializeField]
+        private Merger mergerPrefab;
+
         private TileState[,] levelCells;
 
         private void Start()
@@ -30,7 +42,7 @@ namespace Reflectrix
                     var hasTile = levelGrid.ObstaclesTileMap.HasTile(ConvertCoordinatesFromInternalFormat(i, j, cellBounds.min));
                     if (hasTile)
                     {
-                        levelCells[i, j].OccupyTile(TileObjectType.Obstacle);
+                        levelCells[i, j].OccupyTile(TileObjectType.Obstacle, null);
                     }
                 }
             }
@@ -39,7 +51,7 @@ namespace Reflectrix
             {
                 var tile = levelGrid.Grid.WorldToCell(predefinedGameObjects[i].transform.position);
                 var localCoordinates = ConvertCoordinatesToInternalFormat(tile, cellBounds.min);
-                levelCells[localCoordinates.x, localCoordinates.y].OccupyTile(TileObjectType.PredifinedObject);
+                levelCells[localCoordinates.x, localCoordinates.y].OccupyTile(TileObjectType.PredifinedObject, predefinedGameObjects[i]);
             }
         }
 
@@ -68,7 +80,7 @@ namespace Reflectrix
             return !levelCells[internalCell.x, internalCell.y].IsOccupied;
         }
 
-        public void UpdateCellState(Vector3Int cell, bool isFree)
+        public void OccupyCell(Vector3Int cell, TileObjectType tileObjectType)
         {
             var internalCell = ConvertCoordinatesToInternalFormat(cell, levelGrid.FloorTileMap.cellBounds.min);
             if (!ValidateCellCoordinates(internalCell))
@@ -76,13 +88,46 @@ namespace Reflectrix
                 return;
             }
 
-            if (!isFree)
-            {
-                // TODO: Add the logic to desoccupy the tile.
-                return;
-            }
+            var gameObject = CreateCustomObject(cell, tileObjectType);
+            levelCells[internalCell.x, internalCell.y].OccupyTile(tileObjectType, gameObject);
+        }
 
-            levelCells[internalCell.x, internalCell.y].OccupyTile(TileObjectType.CustomObject);
+        private GameObject CreateCustomObject(Vector3Int cell, TileObjectType tileObjectType)
+        {
+            var position = levelGrid.Grid.GetCellCenterWorld(cell);
+            switch (tileObjectType)
+            {
+                case TileObjectType.Mirror:
+                    return Instantiate(mirrorPrefab, position, Quaternion.identity).gameObject;
+
+                case TileObjectType.Splitter:
+                    return Instantiate(splitterPrefab, position, Quaternion.identity).gameObject;
+
+                case TileObjectType.Merger:
+                    return Instantiate(mergerPrefab, position, Quaternion.identity).gameObject;
+
+                default: throw new InvalidEnumArgumentException("Tile object type is not supported: " + tileObjectType);
+            }
+        }
+
+        private void Clear()
+        {
+            for (int i = 0; i < levelGrid.ObstaclesTileMap.cellBounds.size.x; i++)
+            {
+                for (int j = 0; j < levelGrid.ObstaclesTileMap.cellBounds.size.y; j++)
+                {
+                    if (levelCells[i, j].GameObject != null)
+                    {
+                        Destroy(levelCells[i, j].GameObject);
+                    }
+                }
+            }
+            levelCells = null;
+        }
+
+        private void OnDestroy()
+        {
+            Clear();
         }
 
         private bool ValidateCellCoordinates(Vector2Int cell)
