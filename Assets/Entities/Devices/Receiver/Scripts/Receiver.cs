@@ -3,6 +3,7 @@ using Reflectrix.LaserBeam;
 using Reflectrix.Traits;
 using UniTrait;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Reflectrix.Entities.Devices
 {
@@ -37,7 +38,7 @@ namespace Reflectrix.Entities.Devices
         {
             if ((CurrentIntensity = value) >= targetIntensity)
             {
-                // TODO: display game win screen
+                SceneManager.LoadScene("Scenes/WinScreen");
             }
         }
     }
