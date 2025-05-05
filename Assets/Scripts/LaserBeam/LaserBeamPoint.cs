@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Reflectrix
+namespace Reflectrix.LaserBeam
 {
     [Serializable]
     public struct LaserBeamPoint
@@ -16,9 +16,6 @@ namespace Reflectrix
         private float intensity;
 
         [SerializeField]
-        private float intensityMultiplier;
-
-        [SerializeField]
         private Color color;
 
 # if UNITY_EDITOR
@@ -30,8 +27,6 @@ namespace Reflectrix
         public Vector3 Direction => (direction.position - origin.position).normalized;
 
         public float Intensity => intensity;
-
-        public float IntensityMultiplier => intensityMultiplier;
 
         public Color Color => color;
     }
