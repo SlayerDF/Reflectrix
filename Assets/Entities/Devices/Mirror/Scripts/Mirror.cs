@@ -1,16 +1,23 @@
 ﻿using System.Collections.Generic;
 using Reflectrix.Extensions;
 using Reflectrix.LaserBeam;
+using Reflectrix.Traits;
+using UniTrait;
 using UnityEngine;
 
 namespace Reflectrix.Entities.Devices
 {
-    public class Mirror : MonoBehaviour, IBeamReceiverAndEmitter
+    public class Mirror : UniTraitContainer, IBeamReceiverAndEmitter
     {
         #region Serialized Fields
 
         [SerializeField]
         private Collider2D mirrorCollider;
+
+        [Header("Traits")]
+        [SerializeField]
+        [AutoAddTrait]
+        private RotatableTrait rotatableTrait;
 
         #endregion
 

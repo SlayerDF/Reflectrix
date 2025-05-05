@@ -4,9 +4,9 @@ using Reflectrix.Traits;
 using UniTrait;
 using UnityEngine;
 
-namespace Reflectrix.Entities.Devices
+namespace Reflectrix.Entities.Devices.Merger.Scripts
 {
-    public class Splitter : UniTraitContainer, IBeamReceiverAndEmitter
+    public class Merger : UniTraitContainer, IBeamReceiverAndEmitter
     {
         #region Serialized Fields
 
