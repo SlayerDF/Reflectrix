@@ -1,15 +1,15 @@
-﻿using Reflectrix.Entities.Devices;
+﻿using System.Collections.Generic;
+using Reflectrix.Entities.Devices;
 using Reflectrix.LaserBeam;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Reflectrix
 {
     public class RayBeamManager : MonoBehaviour
     {
         private const float rayWidthMultiplier = 0.05f;
+
+        #region Serialized Fields
 
         [SerializeField]
         private List<Emitter> emitters = new();
@@ -23,13 +23,17 @@ namespace Reflectrix
         [SerializeField]
         private LayerMask obstaclesLayerMask;
 
-        private readonly List<LineRenderer> activeLines = new();
+        #endregion
 
-        private int tileMapSize;
+        private readonly List<LineRenderer> activeLines = new();
 
         private BoundsInt tileBounds;
 
-        private Dictionary<Vector3Int, Color> occupiedTiles = new();
+        private readonly Dictionary<Vector3Int, Color> occupiedTiles = new();
+
+        private int tileMapSize;
+
+        #region Event Functions
 
         private void Start()
         {
@@ -39,12 +43,19 @@ namespace Reflectrix
             foreach (var emitter in emitters)
             {
                 var points = emitter.Emit();
-                for (int i = 0; i < points.Length; i++)
+                for (var i = 0; i < points.Length; i++)
                 {
                     DrawRay(points[i]);
                 }
             }
         }
+
+        private void OnDestroy()
+        {
+            Clear();
+        }
+
+        #endregion
 
         private bool IsPointInBounds(Vector3Int point, BoundsInt bounds)
         {
@@ -54,7 +65,7 @@ namespace Reflectrix
                    point.y <= bounds.max.y;
         }
 
-        private void DrawRay(LaserBeamPoint laserBeam)
+        private void DrawRay(ILaserBeamPoint laserBeam)
         {
             var path = new List<Vector3>();
             var currentTile = levelGrid.Grid.WorldToCell(laserBeam.Origin);
@@ -63,13 +74,17 @@ namespace Reflectrix
             var stepSize = levelGrid.Grid.cellSize.x * 0.5f;
             var drawLineEnd = true;
 
-            for (int i = 0; i < tileMapSize; i++)
+            for (var i = 0; i < tileMapSize; i++)
             {
                 if (!IsPointInBounds(currentTile, tileBounds))
+                {
                     break;
+                }
 
                 if (levelGrid.FloorTileMap.GetTile(currentTile) == null)
+                {
                     break;
+                }
 
                 // Check if the tile is already occupied by another laser beam.
                 if (occupiedTiles.ContainsKey(currentTile))
@@ -103,7 +118,7 @@ namespace Reflectrix
             // and not on the center of the tile.
             if (path.Count > 0 && drawLineEnd)
             {
-                Vector3 finalPos = path[^1] + step * 0.5f;
+                var finalPos = path[^1] + step * 0.5f;
                 path.Add(finalPos);
             }
 
@@ -130,21 +145,17 @@ namespace Reflectrix
 
         private void Clear()
         {
-            for (int i = 0; i < activeLines.Count; i++)
+            for (var i = 0; i < activeLines.Count; i++)
             {
                 if (activeLines[i] != null)
                 {
                     Destroy(activeLines[i].gameObject);
                 }
             }
+
             activeLines.Clear();
 
             occupiedTiles.Clear();
-        }
-
-        private void OnDestroy()
-        {
-            Clear();
         }
     }
 }

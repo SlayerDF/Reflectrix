@@ -2,6 +2,6 @@
 {
     public interface IBeamReceiver
     {
-        bool Receive(LaserBeamPoint[] beamPoint);
+        bool Receive(ILaserBeamPoint[] beamPoint);
     }
 }

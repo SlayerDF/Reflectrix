@@ -2,6 +2,6 @@
 {
     public interface IBeamEmitter
     {
-        LaserBeamPoint[] Emit();
+        ILaserBeamPoint[] Emit();
     }
 }
