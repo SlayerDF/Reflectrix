@@ -9,10 +9,18 @@ namespace Reflectrix
         [SerializeField]
         private Grid grid;
 
+        [SerializeField]
+        private Tilemap floorTileMap;
+
+        [SerializeField]
+        private Tilemap obstaclesTileMap;
+
         /// <summary>
         /// Current level grid.
         /// </summary>
         public Grid Grid => grid;
+
+        public Tilemap FloorTileMap => floorTileMap;
 
         /// <summary>
         /// Calculate map bounds based on all tilemaps in the level grid.
