@@ -1,5 +1,6 @@
 ﻿using Reflectrix.Assets.Scripts;
-using System;
+using Reflectrix.Traits;
+using UniTrait;
 using UnityEngine;
 
 namespace Reflectrix.PlayerController
@@ -26,6 +27,9 @@ namespace Reflectrix.PlayerController
 
         [SerializeField]
         private DevicesPanel devicesPanel;
+
+        [SerializeField]
+        private DeviceEditingPanel deviceEditingPanel;
 
         private GameObject playerInputGameObject;
 
@@ -60,14 +64,41 @@ namespace Reflectrix.PlayerController
                 return;
             }
 
-            if (!levelBuilder.IsCellFree(tile))
+            if (!levelBuilder.TryGetTile(tile, out var tileObject))
             {
-                // TODO: Add the logic for editing device rotation.
-                Debug.Log("Current tile is occupied.");
+                Debug.Log($"Tile is not available for editing.");
                 return;
             }
 
-            devicesPanel.ShowDevicesPanel(screenPosition);
+            if (tileObject.Value.IsOccupied)
+            {
+                ProcessOccupiedTile(tileObject.Value, screenPosition);
+            }
+            else
+            {
+                // Show the devices panel at the clicked position to add new device.
+                devicesPanel.ShowDevicesPanel(screenPosition);
+            }
+        }
+
+        private void ProcessOccupiedTile(TileState tileObject, Vector2 screenPosition)
+        {
+            if (tileObject.TileObjectType == TileObjectType.None ||
+                tileObject.TileObjectType == TileObjectType.Obstacle ||
+                tileObject.TileObjectType == TileObjectType.PredifinedObject)
+            {
+                Debug.Log($"Tile is not available for editing.");
+                return;
+            }
+
+            if (!tileObject.GameObject.TryGetTrait<RotatableTrait>(out var rotatableTrait))
+            {
+                Debug.LogError($"Device {tileObject.TileObjectType} does not have a RotatableTrait component.");
+                return;
+            }
+
+            // Show the panel to edit devices rotation.
+            deviceEditingPanel.ShowPanel(screenPosition, rotatableTrait);
         }
 
         private void OnDeviceSelected(object sender, TileObjectType tileObjectType)
