@@ -80,6 +80,19 @@ namespace Reflectrix
             return !levelCells[internalCell.x, internalCell.y].IsOccupied;
         }
 
+        public bool TryGetTile(Vector3Int cell, out TileState? tile)
+        {
+            tile = null;
+            var internalCell = ConvertCoordinatesToInternalFormat(cell, levelGrid.FloorTileMap.cellBounds.min);
+            if (!ValidateCellCoordinates(internalCell))
+            {
+                return false;
+            }
+
+            tile = levelCells[internalCell.x, internalCell.y];
+            return true;
+        }
+
         public void OccupyCell(Vector3Int cell, TileObjectType tileObjectType)
         {
             var internalCell = ConvertCoordinatesToInternalFormat(cell, levelGrid.FloorTileMap.cellBounds.min);
@@ -112,9 +125,9 @@ namespace Reflectrix
 
         private void Clear()
         {
-            for (int i = 0; i < levelGrid.ObstaclesTileMap.cellBounds.size.x; i++)
+            for (int i = 0; i < levelCells.GetLength(0); i++)
             {
-                for (int j = 0; j < levelGrid.ObstaclesTileMap.cellBounds.size.y; j++)
+                for (int j = 0; j < levelCells.GetLength(1); j++)
                 {
                     if (levelCells[i, j].GameObject != null)
                     {

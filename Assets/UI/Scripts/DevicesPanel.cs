@@ -11,7 +11,7 @@ namespace Reflectrix
         private RectTransform rectTransform;
 
         [SerializeField]
-        private GameObject uiBlocker;
+        private Button uiBlocker;
 
         [SerializeField]
         private Button btn_Mirror;
@@ -30,6 +30,7 @@ namespace Reflectrix
             btn_Mirror.onClick.AddListener(OnMirrorButtonClicked);
             btn_Splitter.onClick.AddListener(OnSplitterButtonClicked);
             btn_Merger.onClick.AddListener(OnMergerButtonClicked);
+            uiBlocker.onClick.AddListener(HideDevicesPanel);
         }
 
         private void OnMergerButtonClicked()
@@ -52,19 +53,20 @@ namespace Reflectrix
             btn_Mirror.onClick.RemoveListener(OnMirrorButtonClicked);
             btn_Splitter.onClick.RemoveListener(OnSplitterButtonClicked);
             btn_Merger.onClick.RemoveListener(OnMergerButtonClicked);
+            uiBlocker.onClick.RemoveListener(HideDevicesPanel);
         }
 
         public void ShowDevicesPanel(Vector2 screenPoint)
         {
             rectTransform.position = screenPoint;
             gameObject.SetActive(true);
-            uiBlocker.SetActive(true);
+            uiBlocker.gameObject.SetActive(true);
         }
 
         public void HideDevicesPanel()
         {
             gameObject.SetActive(false);
-            uiBlocker.SetActive(false);
+            uiBlocker.gameObject.SetActive(false);
         }
     }
 }
