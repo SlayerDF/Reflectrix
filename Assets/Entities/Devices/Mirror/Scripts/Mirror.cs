@@ -40,7 +40,7 @@ namespace Reflectrix.Entities.Devices
 
                 var reflectedDir = Vector3.Reflect(beam.Direction, transform.up);
 
-                reflectedBeams.Add(new LaserBeamPoint(hit.point.ToVector3(), reflectedDir, beam.Intensity));
+                reflectedBeams.Add(new LaserBeamPoint(hit.point.ToVector3(), reflectedDir, beam.Intensity, beam.Color));
             }
 
             return reflectedBeams.ToArray();
