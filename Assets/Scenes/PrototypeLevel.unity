@@ -3705,7 +3705,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1919212805}
-  - component: {fileID: 1919212804}
+  - component: {fileID: 1919212806}
   m_Layer: 0
   m_Name: RayBeamManager
   m_TagString: Untagged
@@ -3713,28 +3713,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1919212804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1919212803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75871b1764469cf4eb6acb012d3c3eb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emitters:
-  - {fileID: 73394318}
-  - {fileID: 538732460}
-  - {fileID: 920365655}
-  - {fileID: 1464741579}
-  levelGrid: {fileID: 1676067563}
-  linePrefab: {fileID: 6492918174505166901, guid: 65aa537aee2820844b6d55a689b358ee, type: 3}
-  obstaclesLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!4 &1919212805
 Transform:
   m_ObjectHideFlags: 0
@@ -3750,6 +3728,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1919212806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919212803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ee46e6b8dba01419f2657693d6ab22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emitters:
+  - {fileID: 73394318}
+  - {fileID: 538732460}
+  - {fileID: 920365655}
+  - {fileID: 1464741579}
+  levelGrid: {fileID: 1676067563}
+  linePrefab: {fileID: 6492918174505166901, guid: 65aa537aee2820844b6d55a689b358ee, type: 3}
+  obstaclesLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

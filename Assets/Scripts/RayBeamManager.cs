@@ -1,5 +1,5 @@
-﻿using LaserBeam;
-using Reflectrix.Entities.Devices;
+﻿using Reflectrix.Entities.Devices;
+using Reflectrix.LaserBeam;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +34,7 @@ namespace Reflectrix
 
             foreach (var emitter in emitters)
             {
-                var points = emitter.LaserEmitterTrait.Emit();
+                var points = emitter.Emit();
                 for (int i = 0; i < points.Length; i++)
                 {
                     DrawRay(points[i]);
