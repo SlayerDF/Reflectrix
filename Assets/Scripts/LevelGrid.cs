@@ -22,6 +22,8 @@ namespace Reflectrix
 
         public Tilemap FloorTileMap => floorTileMap;
 
+        public Tilemap ObstaclesTileMap => obstaclesTileMap;
+
         /// <summary>
         /// Calculate map bounds based on all tilemaps in the level grid.
         /// </summary>
