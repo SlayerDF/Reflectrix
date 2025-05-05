@@ -27,10 +27,5 @@ namespace Reflectrix
         {
             playerControls?.Dispose();
         }
-
-        public void TestClick()
-        {
-            Debug.Log("TEst click!");
-        }
     }
 }
