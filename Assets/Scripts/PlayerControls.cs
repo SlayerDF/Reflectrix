@@ -152,6 +152,54 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Player"",
+            ""id"": ""b6934264-bb19-4b8d-94c6-c594eb0b8a97"",
+            ""actions"": [
+                {
+                    ""name"": ""MouseLeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""b86ddeb3-f13b-47eb-915f-96c845dd0858"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Touch"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2b7ef1e-47fa-4070-a881-2a94f2bfd610"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""dfc4af8f-0133-404d-9af7-3ce250df141e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseLeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c6c7baba-7653-4585-ac52-a87ad1fe76b7"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Touch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -163,6 +211,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Camera_PrimaryFingerPosition = m_Camera.FindAction("PrimaryFingerPosition", throwIfNotFound: true);
         m_Camera_SecondaryFingerPosition = m_Camera.FindAction("SecondaryFingerPosition", throwIfNotFound: true);
         m_Camera_TouchDelta = m_Camera.FindAction("TouchDelta", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_MouseLeftClick = m_Player.FindAction("MouseLeftClick", throwIfNotFound: true);
+        m_Player_Touch = m_Player.FindAction("Touch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -298,6 +350,60 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+
+    // Player
+    private readonly InputActionMap m_Player;
+    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_MouseLeftClick;
+    private readonly InputAction m_Player_Touch;
+    public struct PlayerActions
+    {
+        private @PlayerControls m_Wrapper;
+        public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MouseLeftClick => m_Wrapper.m_Player_MouseLeftClick;
+        public InputAction @Touch => m_Wrapper.m_Player_Touch;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            @MouseLeftClick.started += instance.OnMouseLeftClick;
+            @MouseLeftClick.performed += instance.OnMouseLeftClick;
+            @MouseLeftClick.canceled += instance.OnMouseLeftClick;
+            @Touch.started += instance.OnTouch;
+            @Touch.performed += instance.OnTouch;
+            @Touch.canceled += instance.OnTouch;
+        }
+
+        private void UnregisterCallbacks(IPlayerActions instance)
+        {
+            @MouseLeftClick.started -= instance.OnMouseLeftClick;
+            @MouseLeftClick.performed -= instance.OnMouseLeftClick;
+            @MouseLeftClick.canceled -= instance.OnMouseLeftClick;
+            @Touch.started -= instance.OnTouch;
+            @Touch.performed -= instance.OnTouch;
+            @Touch.canceled -= instance.OnTouch;
+        }
+
+        public void RemoveCallbacks(IPlayerActions instance)
+        {
+            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerActions @Player => new PlayerActions(this);
     public interface ICameraActions
     {
         void OnMousePan(InputAction.CallbackContext context);
@@ -305,5 +411,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnPrimaryFingerPosition(InputAction.CallbackContext context);
         void OnSecondaryFingerPosition(InputAction.CallbackContext context);
         void OnTouchDelta(InputAction.CallbackContext context);
+    }
+    public interface IPlayerActions
+    {
+        void OnMouseLeftClick(InputAction.CallbackContext context);
+        void OnTouch(InputAction.CallbackContext context);
     }
 }
