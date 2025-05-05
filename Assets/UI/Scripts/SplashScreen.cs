@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-namespace Reflectrix
+namespace Reflectrix.UI
 {
     public class SplashScreen : MonoBehaviour
     {
