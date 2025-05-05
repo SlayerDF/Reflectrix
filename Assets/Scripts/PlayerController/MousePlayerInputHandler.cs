@@ -10,6 +10,7 @@ namespace Reflectrix.PlayerController
         private PlayerControls controls;
         private bool isInitialized = false;
         private bool processMouseClick = false;
+        private Vector2 mousePosition;
 
         public void Initialize(PlayerController playerController, PlayerControls controls)
         {
@@ -46,8 +47,7 @@ namespace Reflectrix.PlayerController
             {
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    var pointerPosition = Mouse.current.position.ReadValue();
-                    playerController.OnClick(pointerPosition);
+                    playerController.OnClick(mousePosition);
                 }
 
                 processMouseClick = false;
@@ -57,6 +57,7 @@ namespace Reflectrix.PlayerController
         private void OnMouseLeftClick(InputAction.CallbackContext context)
         {
             processMouseClick = true;
+            mousePosition = Mouse.current.position.ReadValue();
         }
     }
 }

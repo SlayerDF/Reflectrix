@@ -35,6 +35,8 @@ namespace Reflectrix.PlayerController
 
         private IPlayerInputHandler playerInputHandler;
 
+        private Vector3Int currentSelectedTile;
+
         private void Awake()
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -77,6 +79,7 @@ namespace Reflectrix.PlayerController
             else
             {
                 // Show the devices panel at the clicked position to add new device.
+                currentSelectedTile = tile;
                 devicesPanel.ShowDevicesPanel(screenPosition);
             }
         }
@@ -103,9 +106,7 @@ namespace Reflectrix.PlayerController
 
         private void OnDeviceSelected(object sender, TileObjectType tileObjectType)
         {
-            var worldPos = mainCamera.ScreenToWorldPoint(devicesPanel.transform.position);
-            var tile = levelGrid.Grid.WorldToCell(worldPos);
-            levelBuilder.OccupyCell(tile, tileObjectType);
+            levelBuilder.OccupyCell(currentSelectedTile, tileObjectType);
             devicesPanel.HideDevicesPanel();
         }
     }
